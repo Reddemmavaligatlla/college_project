@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>Welcome to RecoSphere</h2>
+
+    {% if message %}
+        <p style="text-align:center; color:#764ba2; margin-bottom:10px;">
+            {{ message }}
+        </p>
+    {% endif %}
+
+    <form method="POST">
+
+        <!-- User ID -->
+        <div class="input-group dropdown">
+            <label>User ID</label>
+
+            <input 
+                type="text"
+                id="userInput"
+                name="user_id"
+                placeholder="Search or enter User ID"
+                autocomplete="off"
+                onclick="toggleDropdown()"
+                onkeyup="filterUsers()"
+                required
+            >
+
+            <div id="dropdownList" class="dropdown-list">
+                {% for uid in user_ids %}
+                <div onclick="selectUser('{{ uid }}')">{{ uid }}</div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Name -->
+        <div class="input-group">
+            <label>Your Name</label>
+            <input 
+                type="text"
+                name="name"
+                placeholder="How should we call you?"
+                required
+            >
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+    </form>
+
+    <div class="footer-text">
+        Friendly • Personalized • Just like a real app ✨
+    </div>
+</div>
+
+<script>
+    const dropdown = document.getElementById("dropdownList");
+    const input = document.getElementById("userInput");
+
+    function toggleDropdown() {
+        dropdown.style.display = "block";
+    }
+
+    function selectUser(userId) {
+        input.value = userId;
+        dropdown.style.display = "none";
+    }
+
+    function filterUsers() {
+        const filter = input.value.toUpperCase();
+        const items = dropdown.getElementsByTagName("div");
+
+        for (let i = 0; i < items.length; i++) {
+            const txtValue = items[i].innerText;
+            items[i].style.display = txtValue.toUpperCase().includes(filter)
+                ? ""
+                : "none";
+        }
+    }
+
+    document.addEventListener("click", function (event) {
+        if (!event.target.closest(".dropdown")) {
+            dropdown.style.display = "none";
+        }
+    });
+</script>
+{% endblock %}

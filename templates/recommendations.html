@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card recommendations-card">
+
+    <!-- ================= CONTENT-BASED ================= -->
+    <div class="recommend-header">
+        <h2>⭐ Recommended for You</h2>
+        <p class="subtitle">
+            Recommended items similar to what <b>YOU</b> like
+        </p>
+    </div>
+
+    <div class="products-grid">
+        {% for product in content_recommendations %}
+        <div class="product-card highlight-card">
+            <h4>{{ product.product_name }}</h4>
+            <span class="category-tag">{{ product.category }}</span>
+            <p class="reason-text">
+                Based on your interest in {{ product.category }}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- ================= COLLABORATIVE ================= -->
+    <div class="recommend-header" style="margin-top:40px;">
+        <h2>👥 Users Like You Also Liked</h2>
+        <p class="subtitle">
+            Recommended items liked by users similar to <b>YOU</b>
+        </p>
+    </div>
+
+    <div class="products-grid">
+        {% for product in collaborative_recommendations %}
+        <div class="product-card">
+            <h4>{{ product.product_name }}</h4>
+            <span class="category-tag">{{ product.category }}</span>
+            <p class="reason-text">
+                Popular among users with similar interests
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

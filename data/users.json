@@ -1,0 +1,52 @@
+{
+    "u1001": {
+        "name": "Aarav",
+        "preferences": [
+            "Electronics",
+            "Books"
+        ]
+    },
+    "u1002": {
+        "name": "Diya",
+        "preferences": [
+            "Electronics",
+            "Home & Kitchen"
+        ]
+    },
+    "u1003": {
+        "name": "Rahul",
+        "preferences": [
+            "Fashion",
+            "Sports"
+        ]
+    },
+    "u1004": {
+        "name": "Meera",
+        "preferences": [
+            "Books",
+            "Home & Kitchen"
+        ]
+    },
+    "u1005": {
+        "name": "Kiran",
+        "preferences": [
+            "Electronics",
+            "Fashion"
+        ]
+    },
+    "u976": {
+        "name": "Indraja",
+        "preferences": [
+            "Electronics",
+            "Books",
+            "Home & Kitchen"
+        ]
+    },
+    "u1062": {
+        "name": "Theju",
+        "preferences": [
+            "Electronics",
+            "Fashion"
+        ]
+    }
+}
