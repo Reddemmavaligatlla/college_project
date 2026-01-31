@@ -48,5 +48,48 @@
             "Electronics",
             "Fashion"
         ]
+    },
+    "u1000": {
+        "name": "Reddy",
+        "preferences": [
+            "Home & Kitchen"
+        ]
+    },
+    "u1010": {
+        "name": "Reddy",
+        "preferences": [
+            "Electronics"
+        ]
+    },
+    "u1116": {
+        "name": "Reddy",
+        "preferences": [
+            "Toys",
+            "Sports"
+        ]
+    },
+    "u117": {
+        "name": "srav",
+        "preferences": [
+            "Books",
+            "Fashion"
+        ]
+    },
+    "u1017": {
+        "name": "sravani",
+        "preferences": [
+            "Electronics",
+            "Books"
+        ]
+    },
+    "u1107": {
+        "name": "sravani",
+        "preferences": [
+            "Home & Kitchen"
+        ]
+    },
+    "u1012": {
+        "name": "Reddy",
+        "preferences": []
     }
 }

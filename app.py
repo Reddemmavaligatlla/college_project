@@ -29,36 +29,23 @@ def login():
         user_id = request.form["user_id"].strip()
         name = request.form["name"].strip()
 
-        # Existing user
         if user_id in users:
             if users[user_id]["name"].lower() != name.lower():
-                message = (
-                    f"Oops 😄 we already have a name for you: "
-                    f"{users[user_id]['name']}"
-                )
+                message = f"Oops 😄 we already have a name for you: {users[user_id]['name']}"
             else:
                 return redirect(url_for("dashboard", user_id=user_id))
-
-        # New user
         else:
-            users[user_id] = {
-                "name": name,
-                "preferences": []
-            }
+            users[user_id] = {"name": name, "preferences": []}
             save_users()
             return redirect(url_for("dashboard", user_id=user_id))
 
-    return render_template(
-        "login.html",
-        user_ids=sorted(existing_ids),
-        message=message
-    )
+    return render_template("login.html", user_ids=sorted(existing_ids), message=message)
 
 
-# ---------------- SAVE USERS ----------------
 def save_users():
     with open(USERS_FILE, "w") as f:
         json.dump(users, f, indent=4)
+
 
 # ---------------- DASHBOARD ----------------
 @app.route("/dashboard/<user_id>")
@@ -66,45 +53,46 @@ def dashboard(user_id):
     if user_id not in users:
         return redirect(url_for("login"))
 
-    name = users[user_id]["name"]
     return render_template(
         "dashboard.html",
-        name=name,
+        name=users[user_id]["name"],
         user_id=user_id
     )
-
 
 
 # ---------------- RECOMMENDATIONS ----------------
 @app.route("/recommendations/<user_id>")
 def recommendations(user_id):
-
     if user_id not in users:
         return redirect(url_for("login"))
 
     user_preferences = users[user_id].get("preferences", [])
-
     if not user_preferences:
         return redirect(url_for("preferences", user_id=user_id))
 
-    # ---------- CONTENT-BASED (PHASE 6) ----------
+    # Content-based
     content_df = recommend_products(
         "data/ecommerce_dataset_cleaned.csv",
         user_preferences,
         top_n=5
     )
-    content_recs = content_df.to_dict(orient="records")
 
-    # ---------- COLLABORATIVE (PHASE 7) ----------
+    content_recs = (
+        content_df[["product_name", "category"]]
+        .drop_duplicates()
+        .to_dict(orient="records")
+    )
+
+    # Collaborative
     collaborative_categories = recommend_from_similar_users(
         user_id,
         "data/users.json",
         top_n=5
     )
 
-    # Convert collaborative categories → products
     df = pd.read_csv("data/ecommerce_dataset_cleaned.csv")
     collab_df = df[df["category"].isin(collaborative_categories)]
+
     collab_recs = (
         collab_df[["product_name", "category"]]
         .drop_duplicates()
@@ -119,16 +107,20 @@ def recommendations(user_id):
         collaborative_recommendations=collab_recs
     )
 
-# ---------------- ALL PRODUCTS PAGE ----------------
+
+# ---------------- ALL PRODUCTS ----------------
 @app.route("/products/<user_id>")
 def products(user_id):
     if user_id not in users:
         return redirect(url_for("login"))
 
-    # Load products from CSV
     df = pd.read_csv("data/ecommerce_dataset_cleaned.csv")
 
-    products = df[["product_name", "category"]].drop_duplicates().to_dict(orient="records")
+    products = (
+        df[["product_name", "category"]]
+        .drop_duplicates()
+        .to_dict(orient="records")
+    )
 
     return render_template(
         "products.html",
@@ -136,30 +128,27 @@ def products(user_id):
         products=products
     )
 
+
 # ---------------- PREFERENCES ----------------
 @app.route("/preferences/<user_id>", methods=["GET", "POST"])
 def preferences(user_id):
-
     if user_id not in users:
         return redirect(url_for("login"))
 
     if request.method == "POST":
         prefs = request.form.get("preferences", "")
-        pref_list = [p for p in prefs.split(",") if p]
-
-        users[user_id]["preferences"] = pref_list
+        users[user_id]["preferences"] = [p for p in prefs.split(",") if p]
         save_users()
-
         return redirect(url_for("dashboard", user_id=user_id))
-
-    existing_preferences = users[user_id].get("preferences", [])
 
     return render_template(
         "preferences.html",
         user_id=user_id,
-        existing_preferences=existing_preferences
+        existing_preferences=users[user_id].get("preferences", [])
     )
 
-# ---------------- RUN APP ----------------
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+

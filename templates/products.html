@@ -3,17 +3,31 @@
 {% block content %}
 <div class="card products-card">
     <h2>🛍️ All Products</h2>
-    <p class="subtitle">
-        Explore everything we offer — same for everyone
-    </p>
+    <p class="subtitle">Explore everything we offer</p>
 
     <div class="products-grid">
         {% for product in products %}
         <div class="product-card">
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='images/products/' ~
+                    (product.product_name | lower | replace(' ', '_')) ~
+                    '.jpeg'
+                ) }}"
+                onerror="this.src='{{ url_for('static', filename='images/products/default.jpeg') }}'"
+                alt="{{ product.product_name }}"
+                width="160"
+            >
+
             <h4>{{ product.product_name }}</h4>
             <span class="category-tag">{{ product.category }}</span>
+
         </div>
         {% endfor %}
     </div>
 </div>
 {% endblock %}
+
+
