@@ -577,3 +577,23 @@ body {
 .price {
     font-weight: 600;
 }
+
+.reason-text {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.4;
+    margin: 8px 0 10px;
+    text-align: center;
+}
+
+.category-tag {
+    display: inline-block;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #f3efff;
+    color: #5a4ad1;
+    font-size: 12px;
+    font-weight: 500;
+}

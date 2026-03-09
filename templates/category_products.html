@@ -39,17 +39,27 @@
             </h3>
 
             <span class="category-badge">
-                {{ product.category }}
+                {{ product.category_display }}
             </span>
 
             <p class="price">
                 ₹{{ product.price }}
             </p>
 
-            <!-- Action Button -->
-            <button class="btn">
-                View Product
-            </button>
+            <p class="reason-text">
+                {{ product.description }}
+            </p>
+
+            <div class="cart-actions">
+                <a class="btn-cart"
+                   href="{{ url_for('product_details', user_id=user_id, product_id=product.product_id) }}">
+                    View Product
+                </a>
+                <a class="buy-btn"
+                   href="{{ url_for('buy_product', user_id=user_id, product_id=product.product_id) }}">
+                    Buy Now
+                </a>
+            </div>
 
         </div>
         {% endfor %}

@@ -1,13 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-
 <div class="products-card">
-
-    <h2 class="page-title">💳 Buy Product</h2>
+    <h2 class="page-title">📦 Product Details</h2>
 
     {% if product %}
-    <div class="product-card" style="max-width: 420px; margin: 0 auto;">
-
+    <div class="product-card" style="max-width: 520px; margin: 0 auto;">
         <div class="product-image">
             <img
                 src="{{ url_for(
@@ -26,18 +23,17 @@
         <p class="price">₹{{ product.price }}</p>
         <p class="reason-text">{{ product.description }}</p>
 
-        <button class="buy-btn" style="width: 100%;">Confirm Purchase</button>
+        <div class="cart-actions">
+            <a class="btn-cart" href="{{ url_for('products', user_id=user_id) }}">
+                ⬅ Back
+            </a>
+            <a class="buy-btn" href="{{ url_for('buy_product', user_id=user_id, product_id=product.product_id) }}">
+                Buy Now
+            </a>
+        </div>
     </div>
     {% else %}
-    <p>No product selected 😕</p>
+    <p>No product found 😕</p>
     {% endif %}
-
-    <div style="text-align:center; margin-top:20px;">
-        <a href="{{ url_for('products', user_id=user_id) }}" class="btn">
-            ⬅ Back to Products
-        </a>
-    </div>
-
 </div>
-
 {% endblock %}
