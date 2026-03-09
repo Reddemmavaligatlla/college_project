@@ -14,21 +14,28 @@
     <!-- Dashboard Actions -->
     <div class="dashboard-grid">
 
-        <!-- All Products -->
+        <!-- 🛍️ All Products -->
         <a href="{{ url_for('products', user_id=user_id) }}" class="dash-card">
             <div class="dash-icon">🛍️</div>
             <h3>All Products</h3>
             <p>Browse everything we offer</p>
         </a>
 
-        <!-- Recommendations -->
+        <!-- 📂 Categories -->
+        <a href="{{ url_for('categories', user_id=user_id) }}" class="dash-card">
+            <div class="dash-icon">📂</div>
+            <h3>Categories</h3>
+            <p>Shop by Men, Women, Kids</p>
+        </a>
+
+        <!-- ⭐ Personalized Recommendations -->
         <a href="{{ url_for('recommendations', user_id=user_id) }}" class="dash-card highlight">
             <div class="dash-icon">⭐</div>
             <h3>My Recommendations</h3>
             <p>Personalized just for you</p>
         </a>
 
-        <!-- Update Preferences -->
+        <!-- ⚙️ Update Preferences -->
         <a href="{{ url_for('preferences', user_id=user_id) }}" class="dash-card">
             <div class="dash-icon">⚙️</div>
             <h3>Update Preferences</h3>
@@ -38,3 +45,4 @@
     </div>
 </div>
 {% endblock %}
+

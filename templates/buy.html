@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="products-card">
+
+    <h2 class="page-title">💳 Buy Products</h2>
+
+    {% if products %}
+    <div class="products-grid">
+
+        {% for product in products %}
+        <div class="product-card">
+
+            <!-- Image -->
+            <div class="product-image">
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/products/' ~
+                        (product.product_name | lower | replace(' ', '_')) ~
+                        '.jpeg'
+                    ) }}"
+                    onerror="this.src='{{ url_for('static', filename='images/products/default.jpeg') }}'"
+                    alt="{{ product.product_name }}"
+                >
+            </div>
+
+            <h3>{{ product.product_name }}</h3>
+            <span class="category-badge">{{ product.category }}</span>
+            <p class="price">₹{{ product.price }}</p>
+
+            <button class="buy-btn">Confirm Purchase</button>
+
+        </div>
+        {% endfor %}
+
+    </div>
+    {% else %}
+        <p>No products available 😕</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

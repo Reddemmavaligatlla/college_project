@@ -1,3 +1,155 @@
+.page-container {
+    padding: 30px;
+}
+
+.page-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.search-bar input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 250px;
+}
+
+.search-bar button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    background: #6c63ff;
+    color: white;
+    cursor: pointer;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 25px;
+}
+
+.product-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+    text-align: center;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.product-card h3 {
+    margin: 10px 0 5px;
+}
+
+.category {
+    color: #888;
+    font-size: 14px;
+}
+
+.price {
+    font-weight: bold;
+    margin: 8px 0;
+    color: #333;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.wishlist-btn {
+    background: #ff6b6b;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.buy-btn {
+    background: #4caf50;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.order-status {
+    margin-top: 8px;
+    color: green;
+    font-weight: 600;
+}
+
+/* ===================================================== */
+/* ===== FIX SCROLL ONLY FOR RECOMMENDATION PAGE ====== */
+/* ===================================================== */
+
+.recommendations-card {
+    width: 95% !important;
+    max-width: 1200px;
+    margin: 40px auto;
+    max-height: none !important;     /* remove scroll limit */
+    overflow-y: visible !important;  /* remove internal scroll */
+}
+/* ===================================================== */
+/* ============ RECOMMENDATION HEADER STYLE ============ */
+/* ===================================================== */
+
+.recommend-header {
+    text-align: center;
+    margin-bottom: 35px;
+    padding-bottom: 15px;
+    position: relative;
+}
+
+.recommend-header h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.recommend-header .subtitle {
+    font-size: 15px;
+    color: #777;
+}
+
+/* Stylish underline effect */
+.recommend-header::after {
+    content: "";
+    width: 70px;
+    height: 4px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: block;
+    margin: 12px auto 0;
+    border-radius: 10px;
+}
+
+/* ===================================================== */
+/* ================== GLOBAL RESET ===================== */
+/* ===================================================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -11,7 +163,10 @@ body {
     background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
-/* Navbar */
+/* ===================================================== */
+/* ===================== NAVBAR ======================== */
+/* ===================================================== */
+
 .navbar {
     padding: 20px 40px;
     background: rgba(255, 255, 255, 0.15);
@@ -24,7 +179,10 @@ body {
     color: #fff;
 }
 
-/* Main container */
+/* ===================================================== */
+/* =================== MAIN LAYOUT ===================== */
+/* ===================================================== */
+
 .main-container {
     display: flex;
     justify-content: center;
@@ -32,23 +190,30 @@ body {
     min-height: calc(100vh - 80px);
 }
 
-/* Card */
+/* ===================================================== */
+/* ====================== CARD ========================= */
+/* ===================================================== */
+
 .card {
     background: #fff;
     width: 380px;
     padding: 35px;
     border-radius: 15px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    max-height: 85vh;
+    overflow-y: auto;
 }
 
-/* Card Title */
 .card h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #333;
 }
 
-/* Input */
+/* ===================================================== */
+/* ====================== INPUT ======================== */
+/* ===================================================== */
+
 .input-group {
     margin-bottom: 18px;
 }
@@ -68,7 +233,10 @@ body {
     outline: none;
 }
 
-/* Button */
+/* ===================================================== */
+/* ===================== BUTTON ======================== */
+/* ===================================================== */
+
 .btn {
     width: 100%;
     padding: 12px;
@@ -86,178 +254,26 @@ body {
     opacity: 0.9;
 }
 
-/* Footer text */
+/* ===================================================== */
+/* =================== FOOTER TEXT ===================== */
+/* ===================================================== */
+
 .footer-text {
     text-align: center;
     margin-top: 15px;
     font-size: 13px;
     color: #777;
 }
-/* Dropdown */
-.dropdown {
-    position: relative;
-}
 
-.dropdown-list {
-    position: absolute;
-    width: 100%;
-    max-height: 160px;
-    overflow-y: auto;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    margin-top: 6px;
-    display: none;
-    z-index: 10;
-}
+/* ===================================================== */
+/* =================== DASHBOARD ======================= */
+/* ===================================================== */
 
-.dropdown-list div {
-    padding: 10px 14px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.dropdown-list div:hover {
-    background: #f0f0f0;
-}
-/* Preferences Page */
-.preferences-card {
-    width: 520px;
-    text-align: center;
-}
-
-.subtitle {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-/* Category Grid */
-.category-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-bottom: 25px;
-}
-
-/* Category Card */
-.category-card {
-    background: #f7f7fb;
-    padding: 15px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 500;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-}
-
-/* Hide checkbox */
-.category-card input {
-    display: none;
-}
-
-/* Hover */
-.category-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-/* Selected Preferences Section */
-.selected-section {
-    margin-top: 20px;
-    text-align: left;
-}
-
-.selected-section h4 {
-    font-size: 15px;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.selected-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.selected-card {
-    background: #f0ebff;
-    padding: 8px 12px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-}
-
-.selected-card button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    color: #764ba2;
-}
-
-.empty-text {
-    font-size: 13px;
-    color: #777;
-}
-
-/* Category Dropdown reuse */
-#categoryDropdown {
-    max-height: 180px;
-}
-
-/* Selected state */
-.category-card input:checked + span {
-    color: #764ba2;
-    font-weight: 600;
-}
-
-.category-card input:checked {
-    display: none;
-}
-
-.category-card:has(input:checked) {
-    border-color: #764ba2;
-    background: #f0ebff;
-}
-
-/* Save Button */
-.save-btn {
-    margin-top: 10px;
-}
-.pref-list {
-    list-style: none;
-    padding: 0;
-}
-
-.pref-list li {
-    background: #f7f7fb;
-    padding: 10px 14px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.pref-list button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    margin-left: 6px;
-}
-
-
-/* Dashboard */
 .dashboard-card {
     width: 700px;
     text-align: center;
 }
 
-/* Welcome */
 .welcome-section {
     margin-bottom: 30px;
 }
@@ -267,14 +283,12 @@ body {
     margin-bottom: 5px;
 }
 
-/* Dashboard Grid */
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
 
-/* Dashboard Card */
 .dash-card {
     background: #f7f7fb;
     padding: 25px 20px;
@@ -290,117 +304,276 @@ body {
     box-shadow: 0 14px 30px rgba(0,0,0,0.15);
 }
 
-/* Highlighted Card */
 .dash-card.highlight {
     background: linear-gradient(135deg, #667eea, #764ba2);
     color: white;
 }
 
-.dash-card.highlight p {
-    color: #f0f0f0;
-}
-
-/* Icon */
 .dash-icon {
     font-size: 40px;
     margin-bottom: 10px;
 }
 
-.dash-card h3 {
-    font-size: 18px;
-    margin-bottom: 5px;
-}
-
-.dash-card p {
-    font-size: 14px;
-    color: #666;
-}
-
-
-/* ---------- ALL PRODUCTS PAGE ---------- */
+/* ===================================================== */
+/* =================== PRODUCTS ======================== */
+/* ===================================================== */
 
 .products-card {
-    width: 90%;
-    max-width: 1100px;
+    width: 95%;
+    max-width: 1200px;
+    margin: auto;
 }
 
+/* Clean equal grid */
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
-    margin-top: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 25px;
+    padding: 20px;
 }
 
+/* Equal-size product card */
 .product-card {
-    background: #ffffff;
-    padding: 18px;
-    border-radius: 14px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 15px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: relative;
+    transition: transform 0.3s ease;
 }
 
 .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    transform: translateY(-6px);
 }
 
-.product-card h4 {
-    font-size: 16px;
-    margin-bottom: 10px;
-    color: #333;
+/* Product Image */
+.product-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
-/* Category Tag */
-.category-tag {
-    display: inline-block;
-    padding: 6px 12px;
+/* 🔥 Discount badge */
+.discount-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: linear-gradient(135deg, #ff5252, #ff1744);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 10px;
     font-size: 12px;
-    border-radius: 20px;
-    background: #f0ebff;
-    color: #764ba2;
     font-weight: 600;
 }
 
-
-
-/* ---------- RECOMMENDATIONS PAGE ---------- */
-
-.recommendations-card {
-    width: 90%;
-    max-width: 1100px;
+/* 🏷 Category badge */
+.category-badge {
+    margin-top: 8px;
+    background: #f0ecff;
+    color: #5a4ad1;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
 }
 
-/* Header */
-.recommend-header {
+/* Product title */
+.product-title {
+    margin: 10px 0 5px;
     text-align: center;
-    margin-bottom: 25px;
 }
 
-.recommend-header h2 {
-    font-size: 28px;
-    color: #333;
+/* Price */
+.price {
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-.recommend-header .subtitle {
+/* ===================================================== */
+/* ================= ADD TO CART ======================= */
+/* ===================================================== */
+
+.cart-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+}
+
+/* Add to Cart animation */
+.btn-cart {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
     font-size: 14px;
-    color: #666;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Highlighted recommendation cards */
-.highlight-card {
-    border: 2px solid #764ba2;
+.btn-cart:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Ripple hover effect */
+.btn-cart::after {
+    content: "";
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: rgba(255,255,255,0.2);
+    top: 100%;
+    left: -10%;
+    transform: rotate(10deg);
+    transition: 0.4s ease;
+}
+
+.btn-cart:hover::after {
+    top: -10%;
+}
+
+/* Buy button */
+.buy-btn {
+    background: #ff9800;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* ===================================================== */
+/* ================= SKELETON UI ======================= */
+/* ===================================================== */
+
+@keyframes shimmer {
+    0% { background-position: -450px 0; }
+    100% { background-position: 450px 0; }
+}
+
+.skeleton div {
     background: linear-gradient(
-        145deg,
-        #f8f6ff,
-        #ffffff
+        90deg,
+        #eeeeee 25%,
+        #dddddd 37%,
+        #eeeeee 63%
     );
+    background-size: 400% 100%;
+    animation: shimmer 1.4s infinite;
+    border-radius: 8px;
 }
 
-/* Reason text */
-.reason-text {
-    margin-top: 10px;
-    font-size: 13px;
-    color: #555;
-    font-style: italic;
+.skeleton-img {
+    width: 100%;
+    height: 180px;
+}
+
+.skeleton-text {
+    height: 14px;
+    margin-top: 12px;
+}
+
+.skeleton-text.short {
+    width: 60%;
+}
+
+.skeleton-btn {
+    height: 36px;
+    margin-top: 18px;
+}
+
+/* ===================================================== */
+/* ================= LOGIN DROPDOWN ==================== */
+/* ===================================================== */
+
+.input-group.dropdown {
+    position: relative;
+}
+
+.dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 180px;
+    overflow-y: auto;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    display: none;
+    z-index: 1000;
+}
+
+.dropdown-list div {
+    padding: 10px 14px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.dropdown-list div:hover {
+    background: #f0ecff;
+}
+
+.dropdown-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dropdown-list::-webkit-scrollbar-thumb {
+    background: #764ba2;
+    border-radius: 6px;
+}
+/* ===================================================== */
+/* ========== ✅ FINAL OVERRIDE: ATTRACTIVE GRID ======= */
+/* ===================================================== */
+
+/* 🌟 AUTO-ADJUSTING KEYBOARD-LIKE GRID (ALL PAGES) */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    padding: 24px;
+}
+
+/* 🌟 CLEAN & EQUAL PRODUCT CARD */
+.product-card {
+    height: auto;               /* remove forced height */
+    padding: 14px;
+    align-items: center;
+}
+
+/* 🌟 IMAGE ALIGNMENT (NO CROPPING, NICE LOOK) */
+.product-image {
+    width: 100%;
+    height: 200px;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 🌟 TEXT CONSISTENCY */
+.product-title {
+    font-size: 15px;
+    text-align: center;
+    min-height: 40px;
+}
+
+.price {
+    font-weight: 600;
 }

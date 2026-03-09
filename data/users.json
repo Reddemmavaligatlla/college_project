@@ -52,6 +52,7 @@
     "u1000": {
         "name": "Reddy",
         "preferences": [
+            "Electronics",
             "Home & Kitchen"
         ]
     },
@@ -90,6 +91,14 @@
     },
     "u1012": {
         "name": "Reddy",
+        "preferences": []
+    },
+    "u1011": {
+        "name": "sravani",
+        "preferences": []
+    },
+    "u1039": {
+        "name": "BHUMIREDDY",
         "preferences": []
     }
 }

@@ -54,62 +54,112 @@
     const hiddenInput = document.getElementById("preferencesInput");
     const inputBox = document.getElementById("categoryInput");
 
-    /* ✅ CORRECT: JS array */
-   let selectedPreferences = {{ existing_preferences | default([]) | tojson }};
+    let selectedPreferences = {{ existing_preferences | default([]) | tojson }};
     let editIndex = null;
 
+    /* Toggle Dropdown */
     function toggleCategoryDropdown() {
-        dropdown.style.display = "block";
+        dropdown.style.display =
+            dropdown.style.display === "block" ? "none" : "block";
     }
 
+    /* Filter Categories While Typing */
     function filterCategories() {
         const filter = inputBox.value.toUpperCase();
         const items = dropdown.getElementsByTagName("div");
 
+        dropdown.style.display = "block";
+
         for (let i = 0; i < items.length; i++) {
             const txt = items[i].innerText;
-            items[i].style.display = txt.toUpperCase().includes(filter) ? "" : "none";
+            items[i].style.display =
+                txt.toUpperCase().includes(filter) ? "block" : "none";
         }
     }
 
+    /* Select Category */
     function selectCategory(category) {
+
+        inputBox.value = category;
+
         if (editIndex !== null) {
             selectedPreferences[editIndex] = category;
             editIndex = null;
         } else {
+
             if (selectedPreferences.includes(category)) return;
+
             if (selectedPreferences.length >= 5) {
                 alert("You can select only 5 preferences.");
                 return;
             }
+
             selectedPreferences.push(category);
         }
 
-        inputBox.value = "";
         dropdown.style.display = "none";
         updateList();
     }
 
+    /* Add Using Enter Key */
+    inputBox.addEventListener("keydown", function (event) {
+
+        if (event.key === "Enter") {
+
+            event.preventDefault();
+
+            const typedValue = inputBox.value.trim();
+            if (!typedValue) return;
+
+            const items = dropdown.getElementsByTagName("div");
+            let found = false;
+
+            for (let i = 0; i < items.length; i++) {
+
+                const textOnly = items[i].innerText
+                    .replace(/^[^\w]+/, '')
+                    .trim();
+
+                if (textOnly.toLowerCase() === typedValue.toLowerCase()) {
+                    selectCategory(textOnly);
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                alert("Please select a valid category from list.");
+            }
+        }
+    });
+
+    /* Edit Preference */
     function editPreference(index) {
         inputBox.value = selectedPreferences[index];
         editIndex = index;
         toggleCategoryDropdown();
     }
 
+    /* Remove Preference */
     function removePreference(index) {
         selectedPreferences.splice(index, 1);
         updateList();
     }
 
+    /* Update List UI */
     function updateList() {
+
         listContainer.innerHTML = "";
 
         if (selectedPreferences.length === 0) {
-            listContainer.innerHTML = `<li class="empty-text">No preferences selected yet</li>`;
+            listContainer.innerHTML =
+                `<li class="empty-text">No preferences selected yet</li>`;
         }
 
         selectedPreferences.forEach((pref, index) => {
+
             const li = document.createElement("li");
+
             li.innerHTML = `
                 <span>${pref}</span>
                 <div>
@@ -117,12 +167,14 @@
                     <button type="button" onclick="removePreference(${index})">❌</button>
                 </div>
             `;
+
             listContainer.appendChild(li);
         });
 
         hiddenInput.value = selectedPreferences.join(",");
     }
 
+    /* Close Dropdown When Clicking Outside */
     document.addEventListener("click", function (event) {
         if (!event.target.closest(".dropdown")) {
             dropdown.style.display = "none";
@@ -131,4 +183,5 @@
 
     updateList();
 </script>
+
 {% endblock %}

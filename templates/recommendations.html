@@ -3,7 +3,7 @@
 {% block content %}
 <div class="card recommendations-card">
 
-    <!-- CONTENT BASED -->
+    <!-- ================= CONTENT BASED ================= -->
     <div class="recommend-header">
         <h2>⭐ Recommended for You</h2>
         <p class="subtitle">Based on your preferences</p>
@@ -35,7 +35,8 @@
         {% endfor %}
     </div>
 
-    <!-- COLLABORATIVE -->
+
+    <!-- ================= COLLABORATIVE ================= -->
     <div class="recommend-header" style="margin-top:40px;">
         <h2>👥 Users Like You Also Liked</h2>
         <p class="subtitle">Popular among similar users</p>
@@ -67,7 +68,38 @@
         {% endfor %}
     </div>
 
+
+    <!-- ================= TRENDING ================= -->
+    <div class="recommend-header" style="margin-top:40px;">
+        <h2>🔥 Trending Now</h2>
+        <p class="subtitle">Most interacted products</p>
+    </div>
+
+    <div class="products-grid">
+        {% for product in trending_recommendations %}
+        <div class="product-card">
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='images/products/' ~
+                    (product.product_name | lower | replace(' ', '_')) ~
+                    '.jpeg'
+                ) }}"
+                onerror="this.src='{{ url_for('static', filename='images/products/default.jpeg') }}'"
+                alt="{{ product.product_name }}"
+                width="160"
+            >
+
+            <h4>{{ product.product_name }}</h4>
+            <span class="category-tag">{{ product.category }}</span>
+
+            <p class="reason-text">
+                Trending based on recent activity
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+
 </div>
 {% endblock %}
-
-

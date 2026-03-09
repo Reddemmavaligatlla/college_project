@@ -22,5 +22,29 @@
         {% block content %}{% endblock %}
     </div>
 
+    <!-- ✅ ADDED: Category filtering JS (for Home page categories) -->
+    <script>
+        function filterCategory(category) {
+            let products = document.querySelectorAll(".product-card");
+            let kidsSub = document.getElementById("kidsSub");
+
+            if (kidsSub) kidsSub.style.display = "none";
+
+            products.forEach(product => {
+                if (category === "all" || product.classList.contains(category)) {
+                    product.style.display = "block";
+                } else {
+                    product.style.display = "none";
+                }
+            });
+        }
+
+        function showKids() {
+            let kidsSub = document.getElementById("kidsSub");
+            if (kidsSub) kidsSub.style.display = "flex";
+        }
+    </script>
+
 </body>
 </html>
+

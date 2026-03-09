@@ -48,6 +48,21 @@
         <button type="submit" class="btn">Login</button>
     </form>
 
+    <!-- 🔹 FORGOT PASSWORD -->
+    <div style="text-align:center; margin-top:12px;">
+        <a href="{{ url_for('register.forgot_password') }}">
+            Forgot Password?
+        </a>
+    </div>
+
+    <!-- 🔹 REGISTER -->
+    <div style="text-align:center; margin-top:6px;">
+        New user?
+        <a href="{{ url_for('register.register') }}">
+            Create an account
+        </a>
+    </div>
+
     <div class="footer-text">
         Friendly • Personalized • Just like a real app ✨
     </div>
@@ -85,3 +100,4 @@
     });
 </script>
 {% endblock %}
+

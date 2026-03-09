@@ -2,32 +2,110 @@
 
 {% block content %}
 <div class="card products-card">
-    <h2>🛍️ All Products</h2>
-    <p class="subtitle">Explore everything we offer</p>
 
-    <div class="products-grid">
+    <!-- Page Title -->
+    <h2 class="page-title">
+        {{ page_title or "🛍️ Products" }}
+    </h2>
+    <p class="subtitle">
+        Explore products selected for you
+    </p>
+
+    <!-- 🔹 Skeleton Loading -->
+    <div class="products-grid skeleton-wrapper">
+        {% for i in range(6) %}
+        <div class="product-card skeleton">
+            <div class="skeleton-img"></div>
+            <div class="skeleton-text"></div>
+            <div class="skeleton-text short"></div>
+            <div class="skeleton-btn"></div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- 🔹 Actual Products -->
+    <div class="products-grid real-products" style="display:none;">
         {% for product in products %}
         <div class="product-card">
 
-            <img
-                src="{{ url_for(
-                    'static',
-                    filename='images/products/' ~
-                    (product.product_name | lower | replace(' ', '_')) ~
-                    '.jpeg'
-                ) }}"
-                onerror="this.src='{{ url_for('static', filename='images/products/default.jpeg') }}'"
-                alt="{{ product.product_name }}"
-                width="160"
-            >
+            {% if product.discount %}
+            <span class="discount-badge">
+                {{ product.discount }}% OFF
+            </span>
+            {% endif %}
 
-            <h4>{{ product.product_name }}</h4>
-            <span class="category-tag">{{ product.category }}</span>
+            <!-- Image -->
+            <div class="product-image">
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/products/' ~
+                        (product.product_name | lower | replace(' ', '_')) ~
+                        '.jpeg'
+                    ) }}"
+                    onerror="this.src='{{ url_for('static', filename='images/products/default.jpeg') }}'"
+                    alt="{{ product.product_name }}"
+                >
+            </div>
+
+            <!-- Category -->
+            <span class="category-badge">
+                {{ product.category }}
+            </span>
+
+            <!-- Name -->
+            <h3 class="product-title">
+                {{ product.product_name }}
+            </h3>
+
+            <!-- Price -->
+            <p class="price">
+                ₹{{ product.price }}
+            </p>
+
+            <!-- Actions -->
+            <div class="cart-actions">
+                <button class="btn-cart"
+                        onclick="addToCart('{{ product.category }}')">
+                    🛒 Add to Cart
+                </button>
+
+                <button class="buy-btn"
+                        onclick="buyNow('{{ product.category }}')">
+                    Buy Now
+                </button>
+            </div>
 
         </div>
         {% endfor %}
     </div>
+
 </div>
+
+<script>
+/* Skeleton loader */
+window.addEventListener("load", () => {
+    document.querySelector(".skeleton-wrapper").style.display = "none";
+    document.querySelector(".real-products").style.display = "grid";
+});
+
+function addToCart(category) {
+    sendInteraction(category);
+    alert("Added to cart 🛒");
+}
+
+function buyNow(category) {
+    sendInteraction(category);
+    alert("Proceed to checkout 🛍️");
+}
+
+function sendInteraction(category) {
+    fetch("/track_interaction", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ category: category })
+    });
+}
+</script>
+
 {% endblock %}
-
-
